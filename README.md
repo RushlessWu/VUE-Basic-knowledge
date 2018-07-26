@@ -1,4 +1,5 @@
-* Vue.js是什么?			
+* Vue.js是什么？
+
 "*作者是阿里的尤雨溪,前谷歌前端工程师"		
 "  * 与angular.js类似的是声明式开发，但性能高于angular，体积小很多, 比较适合移动端开发"			
 "  * 它本身不是全能框架, 只关注UI, 如果需要router/ajax, 可以使用对应插件或使用别的库来实现"			
@@ -126,17 +127,25 @@
 "    * v-el : 为某个元素注册一个唯一标识, vue对象通过$els属性访问这个元素对象"			
 "    * v-cloak : 使用它防止闪现表达式, 与css配合: [v-cloak] { display: none }"			
   * 自定义			
-    * 注册全局指令			
+    * 注册全局指令	
+    
       ```			
-"      Vue.directive('my-directive', function(value){"			
-        this.el.innerHTML = value.toUpperCase();			
+"      Vue.directive('my-directive', function(value){"	
+
+        this.el.innerHTML = value.toUpperCase();
+	
       })			
+      ```	
+      
+    * 注册局部指令	
+    
       ```			
-    * 注册局部指令			
-      ```			
-      directives : {			
-        'my-directive' : function(value) {			
-          this.el.innerHTML = value;			
+      directives : {	
+      
+        'my-directive' : function(value) {
+	
+          this.el.innerHTML = value;	
+	  
         }			
       }			
       ```			
