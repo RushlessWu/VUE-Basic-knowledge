@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>15_内置过滤器</title>
+</head>
+<body>
+<!--
+1. capitalize : 首字母大小
+2. uppercase : 全部大写
+3. lowercase : 全部小写
+4. currency : 货币化
+5. pluralize : 单数/复数处理
+6. json : json格式化
+
+7. limitBy : 限定数组的部分元素(下标)
+8. filterBy : 限定数组的部分元素(值)
+9. orderBy : 对数组进行排序
+-->
+<div id="example">
+  <p>{{msg | capitalize}}</p>
+  <p>{{msg | uppercase}}</p>
+  <p>{{msg | lowercase}}</p>
+  <p>{{price | currency 'RMB'}}</p>
+  <p>{{count}} {{count | pluralize 'item'}}</p>
+  <p>{{persons | json}}</p>
+
+  <ul>
+    <li v-for="p in persons | limitBy 1 2">{{p | json}}</li>
+  </ul>
+
+  <br>
+
+  <ul>
+    <li v-for="p in persons | filterBy 'o' in 'name'">{{p | json}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="p in persons | orderBy 'age' -1">{{p | json}}</li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+      msg: 'you Love her!',
+      price: 123123.123123,
+      count: 1,
+      persons: [{name:'Tom', age:13}, {name:'Jack', age:12}, {name:'BoB', age:14}]
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09_列表渲染</title>
+</head>
+<body>
+<!--
+1. 遍历显示数组 : v-for / $index
+2. 遍历显示对象 : v-for / $key
+3. 扩展数组的方法:
+  $set(index, value)
+  $remove(value)
+-->
+
+<div id="demo">
+
+  <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <li v-for="p in persons | filterBy 'o' in 'name'">
+      {{$index}}---{{p.name}}---{{p.age}}---{{p.id}}
+      <!--&#45;&#45;<button @click="deletePerson($index)">删除</button>-->
+      --<button @click="deletePerson(p)">删除</button>
+      --<button @click="updatePerson(p, {id:Date.now(), name:'ABCo', age:33})">更新</button>
+    </li>
+  </ul>
+
+  <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="value in persons[0]">
+      {{$key}}----{{value}}
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      persons: [
+        {id:1, name:'Tom', age:12},
+        {id:2, name:'Jack', age:14},
+        {id:3, name:'Bob', age:13},
+        {id:4, name:'Rose', age:15},
+      ]
+    },
+    methods: {
+     /* deletePerson (index) { //不可用
+        this.persons.splice(index, 1)
+      }*/
+      deletePerson (p) {
+        /* //可用, 但有点麻烦
+        var index = this.persons.indexOf(p)
+        this.persons.splice(index, 1)
+        */
+        this.persons.$remove(p)
+      },
+
+      updatePerson (oldP, newP) {
+        var index = this.persons.indexOf(oldP)
+        // this.persons[index] = newP
+        this.persons.$set(index, newP)
+      }
+    }
+  })
+</script>
+</body>
+</html>

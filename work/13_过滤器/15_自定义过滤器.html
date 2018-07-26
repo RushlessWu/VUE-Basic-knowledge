@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>15_自定义过滤器</title>
+</head>
+<body>
+
+<!--
+1. 全局过滤器
+  Vue.filter('过滤器名', function(value, xxx, yyy) {
+    //处理逻辑
+    return result;
+  });
+2. 局部过滤器
+  new Vue({
+    filters : {
+      '过滤器名' : function(value, xxx, yyy) {
+        //处理逻辑
+        return result;
+      }
+    }
+  })
+-->
+
+<div id="example">
+  <!--过滤器reverse: 对指定值进行倒序显示-->
+  <p>{{msg | reverse}}</p>
+  <!--过滤器wrap: 在指定值的左侧和右侧添加指定的文本-->
+  <p>{{msg | wrap '受不了' '你还喜欢他'}}</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  Vue.filter('reverse', function (value) {
+    return value.split('').reverse().join('')
+  })
+
+  new Vue({
+    el: '#example',
+    data: {
+      msg: '他喜欢你'
+    },
+    filters: {
+      wrap (value, left, right) {
+        return left + ' ' + value + ' ' + right
+      }
+    }
+  })
+</script>
+</body>
+</html>
